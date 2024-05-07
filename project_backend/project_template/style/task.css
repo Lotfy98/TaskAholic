@@ -1,0 +1,79 @@
+nav {
+    padding: 1.5rem 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #2d3748;
+    /* bg-slate-800 */
+}
+
+nav h1 {
+    font-size: 1.25rem;
+    color: #fff;
+}
+
+nav a {
+    color: #fff;
+    /* text-white */
+    text-decoration: none;
+    margin: 3px;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    padding-left: 2rem;
+    padding-right: 2rem;
+    background-color: #4a5568;
+}
+
+nav a:hover {
+    text-decoration: underline;
+}
+/* Main Content Styles */
+main {
+    padding: 7rem 5rem;
+}
+
+h1 {
+    margin-bottom: 1.5rem;
+    font-size: 1.875rem;
+}
+main h1{
+    color: #000;
+}
+.button-group {
+    margin-top: 1rem;
+}
+
+.button-group a {
+    padding: 1rem 2rem;
+    color: #fff;
+    text-decoration: none;
+}
+
+.mark-done {
+    background-color: #34d39e;
+}
+
+.edit {
+    background-color: #4299e1;
+}
+
+.delete {
+    background-color: #ce2a2a;
+}
+
+main p {
+    font-size: 16px;
+    /* Adjust the font size */
+    line-height: 5;
+    /* Adjust the line height */
+    color: #0b0b0b;
+  
+    /* Adjust the bottom margin */
+}
+/* Footer Styles */
+footer {
+    padding: 1.5rem 2rem;
+    background-color: #1a202c;
+    color: #fff;
+    text-align: center;
+}

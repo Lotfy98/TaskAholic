@@ -1,0 +1,78 @@
+/* Navbar Styles */
+nav {
+    padding: 1.5rem 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #2d3748;
+    /* bg-slate-800 */
+}
+
+nav h1 {
+    font-size: 1.25rem;
+    color: #fff;
+}
+
+nav a {
+    color: #fff;
+    /* text-white */
+    text-decoration: none;
+    margin: 3px;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    padding-left: 2rem;
+    padding-right: 2rem;
+    background-color: #4a5568;
+}
+
+nav a:hover {
+    text-decoration: underline;
+}
+
+/* Main Content Styles */
+main {
+    padding: 1.5rem 2rem;
+}
+
+h1 {
+    margin-bottom: 1.5rem;
+    font-size: 1.875rem;
+}
+
+.add-project-button {
+    display: inline-block;
+    padding: 1rem 2rem;
+    background-color: #4299e1;
+    color: #fff;
+    text-decoration: none;
+}
+
+.project-grid {
+    margin-top: 1.5rem;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1rem;
+}
+
+.project-item {
+    padding: 1.5rem;
+    background-color: #edf2f7;
+}
+
+.project-item h2 {
+    margin-bottom: 0.75rem;
+    font-size: 1.25rem;
+}
+
+.project-item p {
+    font-size: 0.875rem;
+    color: #4a5568;
+}
+
+/* Footer Styles */
+footer {
+    padding: 1.5rem 2rem;
+    background-color: #1a202c;
+    color: #fff;
+    text-align: center;
+}

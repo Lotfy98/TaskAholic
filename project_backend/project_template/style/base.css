@@ -1,0 +1,46 @@
+nav {
+    padding: 1.5rem 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #2d3748;
+    /* bg-slate-800 */
+}
+
+nav h1 {
+    font-size: 1.25rem;
+    color: #fff;
+}
+
+nav a {
+    color: #fff;
+    /* text-white */
+    text-decoration: none;
+    margin: 3px;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    padding-left: 2rem;
+    padding-right: 2rem;
+    background-color: #4a5568;
+}
+
+nav a:hover {
+    text-decoration: underline;
+}
+
+
+main {
+    padding-left: 10rem;
+    padding-right: 10rem;
+    padding-top: 10rem;
+    padding-bottom: 10rem;
+    display: flex;
+    justify-content: center;
+    font-size: 1.875rem;
+}
+footer {
+    padding: 1.5rem 2rem;
+    background-color: #1a202c;
+    color: #fff;
+    text-align: center;
+}
