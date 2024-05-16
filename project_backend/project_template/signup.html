@@ -4,42 +4,40 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" href="style/signup.css" >
-
+    <link rel="stylesheet" type="text/css" href="style/signup.css">
+    <title>Sign up - TaskAholic</title> <!-- Add a title to the page -->
 </head>
 
 <body>
     <nav>
         <h1>TaskAholic</h1>
-
         <div>
-            <a href="#">About</a>
-
-            <a href="#">Log in</a>
-            <a href="#">Sign up</a>
+            <a href="about.html">About</a>
+            <a href="login.html">Log in</a>
+            <a href="signup.html">Sign up</a>
         </div>
     </nav>
 
     <main>
         <div class="main-content">
             <h1>Sign up</h1>
-
             <form action="/signup" method="POST">
                 <div class="input-group">
-                    <label>User</label><br>
-                    <input  id="user" name="user" type="user">
+                    <label for="user">Username</label> <!-- Add a for attribute to the label -->
+                    <input id="user" name="user" type="text" required>
+                    <!-- Change type to text and add required attribute -->
                 </div>
                 <div class="input-group">
-                    <label>E-mail</label><br>
-                    <input id="email" name="email" type="email">
+                    <label for="email">E-mail</label>
+                    <input id="email" name="email" type="email" required>
                 </div>
                 <div class="input-group">
-                    <label>Password</label><br>
-                    <input  id="password" name="password" type="password">
+                    <label for="password">Password</label>
+                    <input id="password" name="password" type="password" required>
                 </div>
 
                 <div>
-                    <input type="submit" class="btn" value="Sign In"></br></br>
+                    <input type="submit" class="btn" value="Sign up"> <!-- Change value to Sign up -->
                 </div>
             </form>
         </div>

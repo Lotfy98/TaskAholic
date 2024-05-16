@@ -1,108 +1,60 @@
-from flask_restful import Resource, reqparse, fields, marshal_with
+from flask_restful import Resource, reqparse
 from models import db, User, Project, Task
 
-# Define request parsers
-user_parser = reqparse.RequestParser()
-user_parser.add_argument('username', type=str,
-                         required=True, help='Username is required')
-user_parser.add_argument(
-    'email', type=str, required=True, help='Email is required')
-
-project_parser = reqparse.RequestParser()
-project_parser.add_argument(
-    'title', type=str, required=True, help='Title is required')
-project_parser.add_argument('description', type=str)
-
-task_parser = reqparse.RequestParser()
-task_parser.add_argument(
-    'title', type=str, required=True, help='Title is required')
-task_parser.add_argument('description', type=str)
-
-user_fields = {
-    'id': fields.Integer,
-    'username': fields.String,
-    'email': fields.String
-}
-
-project_fields = {
-    'id': fields.Integer,
-    'title': fields.String,
-    'description': fields.String,
-    'user_id': fields.Integer
-}
-
-task_fields = {
-    'id': fields.Integer,
-    'title': fields.String,
-    'description': fields.String,
-    'project_id': fields.Integer
-}
-
-# Resource for managing users
+parser = reqparse.RequestParser()
+parser.add_argument('username', type=str, required=True,
+                    help='Username cannot be blank')
+parser.add_argument('email', type=str, required=True,
+                    help='Email cannot be blank')
+parser.add_argument('password', type=str, required=True,
+                    help='Password cannot be blank')
+parser.add_argument('role', type=str, required=True,
+                    help='Role cannot be blank')
+parser.add_argument('title', type=str, required=True,
+                    help='Title cannot be blank')
+parser.add_argument('deadline', type=int, required=True,
+                    help='Deadline cannot be blank')
+parser.add_argument('description', type=str, required=True,
+                    help='Description cannot be blank')
 
 
 class UserResource(Resource):
-    @marshal_with(user_fields)
-    def get(self, user_id):
-        user = User.query.get_or_404(user_id)
-        return user
+    def get(self):
+        users = User.query.all()
+        return {'users': [user.username for user in users]}
 
-    @marshal_with(user_fields)
     def post(self):
-        args = user_parser.parse_args()
-        user = User(**args)
-        db.session.add(user)
+        args = parser.parse_args()
+        new_user = User(
+            username=args['username'], email=args['email'], password=args['password'])
+        db.session.add(new_user)
         db.session.commit()
-        return user, 201
-
-    def delete(self, user_id):
-        user = User.query.get_or_404(user_id)
-        db.session.delete(user)
-        db.session.commit()
-        return '', 204
-
-# Resource for managing projects
+        return {'message': f"User {new_user.username} has been created successfully"}, 201
 
 
 class ProjectResource(Resource):
-    @marshal_with(project_fields)
-    def get(self, project_id):
-        project = Project.query.get_or_404(project_id)
-        return project
+    def get(self):
+        projects = Project.query.all()
+        return {'projects': [project.title for project in projects]}
 
-    @marshal_with(project_fields)
     def post(self):
-        args = project_parser.parse_args()
-        project = Project(**args)
-        db.session.add(project)
+        args = parser.parse_args()
+        new_project = Project(title=args['title'], deadline=args['deadline'],
+                              description=args['description'], owner_id=args['owner_id'])
+        db.session.add(new_project)
         db.session.commit()
-        return project, 201
-
-    def delete(self, project_id):
-        project = Project.query.get_or_404(project_id)
-        db.session.delete(project)
-        db.session.commit()
-        return '', 204
-
-# Resource for managing tasks
+        return {'message': f"Project {new_project.title} has been created successfully"}, 201
 
 
 class TaskResource(Resource):
-    @marshal_with(task_fields)
-    def get(self, task_id):
-        task = Task.query.get_or_404(task_id)
-        return task
+    def get(self):
+        tasks = Task.query.all()
+        return {'tasks': [task.title for task in tasks]}
 
-    @marshal_with(task_fields)
     def post(self):
-        args = task_parser.parse_args()
-        task = Task(**args)
-        db.session.add(task)
+        args = parser.parse_args()
+        new_task = Task(title=args['title'], deadline=args['deadline'],
+                        description=args['description'], project_id=args['project_id'])
+        db.session.add(new_task)
         db.session.commit()
-        return task, 201
-
-    def delete(self, task_id):
-        task = Task.query.get_or_404(task_id)
-        db.session.delete(task)
-        db.session.commit()
-        return '', 204
+        return {'message': f"Task {new_task.title} has been created successfully"}, 201
