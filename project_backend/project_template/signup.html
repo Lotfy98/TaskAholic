@@ -1,11 +1,10 @@
-<!doctype html>
 <html>
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="style/signup.css">
-    <title>Sign up - TaskAholic</title> <!-- Add a title to the page -->
+    <title>Sign up - TaskAholic</title>
 </head>
 
 <body>
@@ -13,8 +12,8 @@
         <h1>TaskAholic</h1>
         <div>
             <a href="about.html">About</a>
-            <a href="login.html">Log in</a>
-            <a href="signup.html">Sign up</a>
+            <a href="/login">Log in</a>
+            <a href="/signup">Sign up</a>
         </div>
     </nav>
 
@@ -23,9 +22,8 @@
             <h1>Sign up</h1>
             <form action="/signup" method="POST">
                 <div class="input-group">
-                    <label for="user">Username</label> <!-- Add a for attribute to the label -->
-                    <input id="user" name="user" type="text" required>
-                    <!-- Change type to text and add required attribute -->
+                    <label for="username">Username</label>
+                    <input id="username" name="username" type="text" required>
                 </div>
                 <div class="input-group">
                     <label for="email">E-mail</label>
@@ -37,7 +35,7 @@
                 </div>
 
                 <div>
-                    <input type="submit" class="btn" value="Sign up"> <!-- Change value to Sign up -->
+                    <input type="submit" class="btn" value="Sign up">
                 </div>
             </form>
         </div>

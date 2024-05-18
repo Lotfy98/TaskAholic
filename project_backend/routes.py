@@ -1,40 +1,7 @@
-from flask import Flask, render_template, redirect, url_for, request
-from flask_cors import CORS
-from flask_sqlalchemy import SQLAlchemy
-from flask_login import LoginManager
-from flask_migrate import Migrate
-from resources import api, UserResource, ProjectResource, TaskResource
-import secrets
-from models import User, Project, Task
 from flask import render_template, redirect, url_for, request
 from flask_login import login_user, login_required, logout_user, current_user
-
-app = Flask(__name__, template_folder='project_template',
-            static_folder='project_template/style')
-CORS(app)
-app.config['SECRET_KEY'] = secrets.token_hex(16)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://taskaholic_dev:taskaholic_dev_pwd@localhost/taskaholic_dev_db'
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-
-db = SQLAlchemy(app)
-migrate = Migrate(app, db)
-
-login_manager = LoginManager(app)
-login_manager.login_view = 'login'
-
-
-@login_manager.user_loader
-def load_user(user_id):
-    return User.query.get(int(user_id))
-
-
-api.add_resource(UserResource, '/api/users')
-api.add_resource(ProjectResource, '/api/projects')
-api.add_resource(TaskResource, '/api/tasks')
-
-
-def render_signup():
-    return render_template('signup.html')
+from models import User, Project, Task
+from app import app, db
 
 
 def render_dashboard():
@@ -43,13 +10,17 @@ def render_dashboard():
     return render_template('dashboard.html', projects=projects, tasks=tasks)
 
 
+def render_signup():
+    return render_template('signup.html')
+
+
 def render_login():
     return render_template('login.html')
 
 
 @app.route('/')
 def home():
-    return render_signup()
+    return redirect(url_for('signup'))
 
 
 @app.route('/signup', methods=['GET', 'POST'])
@@ -70,8 +41,8 @@ def signup():
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     if request.method == 'POST':
-        username = request.form.get('username')
-        password = request.form.get('password')
+        username = request.form['username']
+        password = request.form['password']
         user = User.query.filter_by(username=username).first()
         if user and user.check_password(password):
             login_user(user)
@@ -121,8 +92,3 @@ def tasks():
         db.session.commit()
         return redirect(url_for('dashboard'))
     return render_template('tasks.html')
-
-
-if __name__ == '__main__':
-    app.debug = True
-    app.run()

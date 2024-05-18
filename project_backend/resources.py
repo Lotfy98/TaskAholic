@@ -1,5 +1,9 @@
-from flask_restful import Resource, reqparse
+from flask_restful import Resource, reqparse, Api
 from models import db, User, Project, Task
+
+
+api = Api()
+
 
 parser = reqparse.RequestParser()
 parser.add_argument('username', type=str, required=True,
